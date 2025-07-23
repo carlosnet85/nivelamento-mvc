@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ei</title>
+  </head>
+  <body >
+    <div class="container">
+      <h1>Teste de login do cliente {{ customer.name }}!</h1>
+      <p>Email: {{ customer.email }}</p>
+      <p>Senha (hash): {{ customer.password }}</p>
+      <p>Conta criada em: {{ customer.created_at }}</p>
+      <p>
+        Assinaturas:
+        {% for subscription in customer.subscriptions %}
+          <ul>
+            <li>Nome: {{ subscription.name }}</li>
+            <li>Preço: {{ subscription.price }}</li>
+            <li>Parcelas: {{ subscription.installments }}</li>
+            <li>Data de criação: {{ subscription.created_at }}</li>
+            <li>Data de atualização: {{ subscription.updated_at }}</li>
+          </ul>
+        {% endfor %}
+      </p>
+    </div>
+  </body>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #333;
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    
+      border: 1.3px solid #292929;
+      border-radius: 5px;
+
+      max-width: 800px;
+      margin: 10px auto;
+      padding: 20px;
+      
+
+      p {
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</html>

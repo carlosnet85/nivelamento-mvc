@@ -1,9 +1,11 @@
 from typing import List
 from fastapi import HTTPException
+from sqlalchemy import func
 
 from app.schemas.subscriptions import SubscriptionCreate, SubscriptionUpdate
 from app.dependencies.database import db_dependency
 from app.dependencies.auth import user_dependency
+from app.models.customer import Customer
 from app.models.subscriptions import Subscription
 
 def list_user_subscriptions(db: db_dependency, user: user_dependency):
@@ -29,10 +31,14 @@ def create_subscriptions(subscriptions: List[SubscriptionCreate], db: db_depende
             price=sub.price,
             installments=sub.installments
         )
+
         db.add(new_subscription)
         db_subscriptions.append(new_subscription)
+        db.commit()
     
     db.commit()
+    
+            
     for sub in db_subscriptions:
         db.refresh(sub)
     return db_subscriptions
